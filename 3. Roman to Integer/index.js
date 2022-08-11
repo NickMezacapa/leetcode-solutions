@@ -56,7 +56,7 @@ const romanToInt = (s) => {
 		right = 1;
 
 	// while the left pointer is less than the length of the input string,
-	// check if the next character after left pointer (right pointer) is larger.
+	// check if the value of next character after left pointer (right pointer) is larger.
 	while (left < s.length) {
 		if (dict[s[left]] < dict[s[right]]) {
 			// if it is, the value is equal to right - left. Add to sum and move pointers
@@ -64,7 +64,7 @@ const romanToInt = (s) => {
 			left += 2; // adding 2 because right pointer accounts for left++
 			right += 2;
 		}
-		// if not larger, add the value at left index to sum and inrease pointers by 1
+		// if not larger, add the value at left index to sum and increase pointers by 1
 		else {
 			sum += dict[s[left]];
 			left++;
