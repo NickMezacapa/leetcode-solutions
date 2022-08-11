@@ -38,9 +38,9 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 */
 
-const romanToInt = (numeral) => {
-	// Create a map to store to corresponding values
-	const map = {
+const romanToInt = (s) => {
+	// declare an object to store corresponding values
+	const dict = {
 		I: 1,
 		V: 5,
 		X: 10,
@@ -49,16 +49,29 @@ const romanToInt = (numeral) => {
 		D: 500,
 		M: 1000,
 	};
-	let res = 0; // This is our sum of the numerals
-	numeral.split("").forEach((num, i) => {
-		// For each number in the numeral, and the index =>
-		// If i is less than the next character in the string,
-		// Get the difference to satisfy edge cases (Ex: 'IX' = 9, not 11)
-		if (map[num] < map[numeral[i + 1]]) {
-			res -= map[num];
-			// If i is greater than or equal to the next character in string,
-			// Add the two numbers
-		} else res += map[num];
-	});
-	return res;
+	// declare 2 pointers (left and right), and initialize sum
+	// we will return the sum variable after adding corresponding values in s
+	let sum = 0,
+		left = 0,
+		right = 1;
+
+	// while the left pointer is less than the length of the input string,
+	// check if the next character after left pointer (right pointer) is larger.
+	while (left < s.length) {
+		if (dict[s[left]] < dict[s[right]]) {
+			// if it is, the value is equal to right - left. Add to sum and move pointers
+			sum += dict[s[right]] - dict[s[left]];
+			left += 2; // adding 2 because right pointer accounts for left++
+			right += 2;
+		}
+		// if not larger, add the value at left index to sum and inrease pointers by 1
+		else {
+			sum += dict[s[left]];
+			left++;
+			right++;
+		}
+	}
+	return sum;
 };
+
+// Accepted: 139ms, faster than 88% of other runtimes.
