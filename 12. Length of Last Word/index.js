@@ -35,7 +35,7 @@ const lengthOfLastWord = s => {
             foundLast = true;
             last--; // move onto the next character if the next is not a space
         }
-        else if (foundLast && s[end] === " ") return holder.length; // if we've already found the last word and we encounter another space, we have looped over the entire last word
+        else if (foundLast && s[end] === " ") break; // if we've already found the last word and we encounter another space, we have looped over the entire last word
     }
     return holder.length;
 }
